@@ -2,7 +2,8 @@
 
 ## How to use
 
-1. 가속도 측정 가능한 펌웨어 설치
+1. https://jee22.github.io/Accelerometer-monitor/
+2. 가속도 측정 가능한 펌웨어 설치
 2. 좌측 상단 BLE 연결 버튼 클릭
 3. 디바이스 페어링
 
