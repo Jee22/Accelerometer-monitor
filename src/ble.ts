@@ -1,52 +1,23 @@
 import { ble_configs, LINE, MOTION } from './types';
 import { Chart } from 'chart.js';
 
-const axesStore = {
-    xAccelerometerAxes: 0,
-    increaseXAccelerometer: () => ++axesStore.xAccelerometerAxes,
-    yAccelerometerAxes: 0,
-    increaseYAccelerometer: () => ++axesStore.yAccelerometerAxes,
-    zAccelerometerAxes: 0,
-    increaseZAccelerometer: () => ++axesStore.zAccelerometerAxes,
-    magnitudeAxes: 0,
-    increaseMagnitude: () => ++axesStore.magnitudeAxes,
-    xGyroAxes: 0,
-    increaseXGyro: () => ++axesStore.xGyroAxes,
-    yGyroAxes: 0,
-    increaseYGyro: () => ++axesStore.yGyroAxes,
-    zGyroAxes: 0,
-    increaseZGyro: () => ++axesStore.zGyroAxes,
-};
-
-/** Todo: extract */
-interface RenderProps {
-    chart: Chart;
-    lineIndex: number;
-    xAxesValue: number;
-    yAxesValue: number;
-}
-
-/** Todo: extract */
-const updateRenderer = ({ chart, lineIndex, xAxesValue, yAxesValue }: RenderProps) => {
-    chart.data.datasets[lineIndex].data.push({ x: xAxesValue, y: yAxesValue });
-
-    removePrevLine(chart, lineIndex);
-};
-
-/** Todo: extract */
-const removePrevLine = (chart: Chart, axesIndex: number) => {
-    if (chart.data.datasets[axesIndex].data.length > LINE.MAX_POINTS_LENGTH) {
-        const removeRangeIndex = Math.round(
-            chart.data.datasets[axesIndex].data.length * (LINE.PERCENT_TO_REMOVE / 100),
-        );
-        chart.data.datasets[axesIndex].data.splice(0, removeRangeIndex);
-    }
-};
-
 interface ConnectionProps {
     chart: Chart;
     detectedMotionCallback: (motion: MOTION) => void;
 }
+
+export const startBleConnection = async ({ chart, detectedMotionCallback }: ConnectionProps) => {
+    await connectBLE({ chart, detectedMotionCallback });
+
+    let lastAnimationFrameId: number;
+    const RENDER_INTERVAL_MS = 50; // 렌더링 주기마다 차트 업데이트
+
+    setInterval(() => {
+        cancelAnimationFrame(lastAnimationFrameId);
+        lastAnimationFrameId = requestAnimationFrame(() => chart.update());
+    }, RENDER_INTERVAL_MS);
+    // clearInterval(renderInterval);
+};
 
 const connectBLE = async ({ chart, detectedMotionCallback }: ConnectionProps) => {
     try {
@@ -128,15 +99,44 @@ const connectBLE = async ({ chart, detectedMotionCallback }: ConnectionProps) =>
     }
 };
 
-export const startBleConnection = async ({ chart, detectedMotionCallback }: ConnectionProps) => {
-    await connectBLE({ chart, detectedMotionCallback });
+const axesStore = {
+    xAccelerometerAxes: 0,
+    increaseXAccelerometer: () => ++axesStore.xAccelerometerAxes,
+    yAccelerometerAxes: 0,
+    increaseYAccelerometer: () => ++axesStore.yAccelerometerAxes,
+    zAccelerometerAxes: 0,
+    increaseZAccelerometer: () => ++axesStore.zAccelerometerAxes,
+    magnitudeAxes: 0,
+    increaseMagnitude: () => ++axesStore.magnitudeAxes,
+    xGyroAxes: 0,
+    increaseXGyro: () => ++axesStore.xGyroAxes,
+    yGyroAxes: 0,
+    increaseYGyro: () => ++axesStore.yGyroAxes,
+    zGyroAxes: 0,
+    increaseZGyro: () => ++axesStore.zGyroAxes,
+};
 
-    let lastAnimationFrameId: number;
-    const RENDER_INTERVAL_MS = 50; // 렌더링 주기마다 차트 업데이트
+/** Todo: extract */
+interface RenderProps {
+    chart: Chart;
+    lineIndex: number;
+    xAxesValue: number;
+    yAxesValue: number;
+}
 
-    setInterval(() => {
-        cancelAnimationFrame(lastAnimationFrameId);
-        lastAnimationFrameId = requestAnimationFrame(() => chart.update());
-    }, RENDER_INTERVAL_MS);
-    // clearInterval(renderInterval);
+/** Todo: extract */
+const updateRenderer = ({ chart, lineIndex, xAxesValue, yAxesValue }: RenderProps) => {
+    chart.data.datasets[lineIndex].data.push({ x: xAxesValue, y: yAxesValue });
+
+    removePrevLine(chart, lineIndex);
+};
+
+/** Todo: extract */
+const removePrevLine = (chart: Chart, axesIndex: number) => {
+    if (chart.data.datasets[axesIndex].data.length > LINE.MAX_POINTS_LENGTH) {
+        const removeRangeIndex = Math.round(
+            chart.data.datasets[axesIndex].data.length * (LINE.PERCENT_TO_REMOVE / 100),
+        );
+        chart.data.datasets[axesIndex].data.splice(0, removeRangeIndex);
+    }
 };

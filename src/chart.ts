@@ -6,6 +6,7 @@ Chart.register(...registerables);
 const MAX_Y_AXES_HEIGHT = 1500;
 const TICK_GAP = 100;
 const ANIMATION_DURATION = 0;
+export const createChart = (ctx: HTMLCanvasElement) => new Chart(ctx, chartConfigs);
 
 const colorStore = {
     magnitudeBorder: 'rgba(123, 123, 123, 1)',
@@ -101,7 +102,6 @@ const chartConfigs: ChartConfiguration = {
     },
 };
 
-export const createChart = (ctx: HTMLCanvasElement) => new Chart(ctx, chartConfigs);
 export const selectLineColor = (motion: MOTION) => {
     switch (motion) {
         case MOTION.SLEEP:
