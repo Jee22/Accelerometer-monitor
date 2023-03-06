@@ -5,7 +5,7 @@ export default {
     // You can also specify the entry point in the "index.html" file using a script tag
     // and Vite will automatically detect it
     entry: 'src/main.js',
-    
+    base: '/Accelerometer-monitor/',
 
     // Specify the output directory and file name for the production build
     build: {
