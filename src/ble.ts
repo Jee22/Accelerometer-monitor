@@ -52,7 +52,7 @@ const connectBLE = async ({ chart, detectedMotionCallback }: ConnectionProps) =>
         //         yAxesValue: magnitude,
         //     });
         // });
-        await magnitudeCharacteristic.startNotifications();
+        // await magnitudeCharacteristic.startNotifications();
 
         // Characteristic 이벤트 등록
         [xCharacteristic, yCharacteristic, zCharacteristic].forEach((characteristic, index) => {
