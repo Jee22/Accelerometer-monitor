@@ -1,7 +1,7 @@
 import { createChart } from './chart';
 
 import { startBleConnection } from './ble';
-import { MOTION } from './types';
+// import { MOTION } from './types';
 
 const chartContext = document.getElementById('myChart') as HTMLCanvasElement;
 

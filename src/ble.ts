@@ -1,4 +1,4 @@
-import { ble_configs, LINE, MOTION } from './types';
+import { ble_configs, LINE } from './types';
 import { Chart } from 'chart.js';
 
 interface ConnectionProps {
