@@ -44,14 +44,14 @@ const data: ChartData = {
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             fill: false,
         },
-        {
-            label: 'magnitude',
-            data: [],
-            pointRadius: 0,
-            borderColor: colorStore.magnitudeBorder,
-            backgroundColor: colorStore.magnitudeBackground,
-            fill: false,
-        },
+        // {
+        //     label: 'magnitude',
+        //     data: [],
+        //     pointRadius: 0,
+        //     borderColor: colorStore.magnitudeBorder,
+        //     backgroundColor: colorStore.magnitudeBackground,
+        //     fill: false,
+        // },
     ],
 };
 

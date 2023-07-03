@@ -4,7 +4,7 @@ export enum ble_configs {
     X_CHAR = 'ef680806-9b35-4933-9b10-52ffa9740042',
     Y_CHAR = 'ef680807-9b35-4933-9b10-52ffa9740042',
     Z_CHAR = 'ef680808-9b35-4933-9b10-52ffa9740042',
-    MAGNITUDE_CHAR = 'ef680809-9b35-4933-9b10-52ffa9740042',
+    // MAGNITUDE_CHAR = 'ef680809-9b35-4933-9b10-52ffa9740042',
 }
 
 export enum LINE {

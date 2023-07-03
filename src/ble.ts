@@ -32,26 +32,26 @@ const connectBLE = async ({ chart, detectedMotionCallback }: ConnectionProps) =>
         const service = await server.getPrimaryService(ble_configs.AXIS_SERVICE_UUID);
         console.info(`service: `, service);
 
-        const [xCharacteristic, yCharacteristic, zCharacteristic, magnitudeCharacteristic] = await Promise.all([
+        const [xCharacteristic, yCharacteristic, zCharacteristic] = await Promise.all([
             service.getCharacteristic(ble_configs.X_CHAR),
             service.getCharacteristic(ble_configs.Y_CHAR),
             service.getCharacteristic(ble_configs.Z_CHAR),
-            service.getCharacteristic(ble_configs.MAGNITUDE_CHAR),
+            // service.getCharacteristic(ble_configs.MAGNITUDE_CHAR),
         ]);
 
         /** x y z 벡터 크기 합 수신 이벤트*/
-        magnitudeCharacteristic.addEventListener('characteristicvaluechanged', (event: any) => {
-            const magnitude = event.target.value.getInt16(0, true);
-            const motionState = event.target.value.getInt8(2);
+        // magnitudeCharacteristic.addEventListener('characteristicvaluechanged', (event: any) => {
+        //     const magnitude = event.target.value.getInt16(0, true);
+        //     const motionState = event.target.value.getInt8(2);
 
-            detectedMotionCallback(motionState);
-            updateRenderer({
-                chart,
-                lineIndex: LINE.MAGNITUDE,
-                xAxesValue: axesStore.increaseMagnitude(),
-                yAxesValue: magnitude,
-            });
-        });
+        //     detectedMotionCallback(motionState);
+        //     updateRenderer({
+        //         chart,
+        //         lineIndex: LINE.MAGNITUDE,
+        //         xAxesValue: axesStore.increaseMagnitude(),
+        //         yAxesValue: magnitude,
+        //     });
+        // });
         await magnitudeCharacteristic.startNotifications();
 
         // Characteristic 이벤트 등록
