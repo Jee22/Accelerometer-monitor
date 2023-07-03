@@ -3,7 +3,6 @@ import { Chart } from 'chart.js';
 
 interface ConnectionProps {
     chart: Chart;
-    detectedMotionCallback: (motion: MOTION) => void;
 }
 
 export const startBleConnection = async ({ chart }: ConnectionProps) => {
