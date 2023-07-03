@@ -6,8 +6,8 @@ interface ConnectionProps {
     detectedMotionCallback: (motion: MOTION) => void;
 }
 
-export const startBleConnection = async ({ chart, detectedMotionCallback }: ConnectionProps) => {
-    await connectBLE({ chart, detectedMotionCallback });
+export const startBleConnection = async ({ chart }: ConnectionProps) => {
+    await connectBLE({ chart });
 
     let lastAnimationFrameId: number;
     const RENDER_INTERVAL_MS = 50; // 렌더링 주기마다 차트 업데이트
@@ -19,7 +19,7 @@ export const startBleConnection = async ({ chart, detectedMotionCallback }: Conn
     // clearInterval(renderInterval);
 };
 
-const connectBLE = async ({ chart, detectedMotionCallback }: ConnectionProps) => {
+const connectBLE = async ({ chart }: ConnectionProps) => {
     try {
         const device = await navigator.bluetooth.requestDevice({
             filters: [{ name: ble_configs.DEVICE_NAME }],
