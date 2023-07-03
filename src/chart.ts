@@ -3,7 +3,7 @@ import { MOTION } from './types';
 
 Chart.register(...registerables);
 
-const MAX_Y_AXES_HEIGHT = 1500;
+const MAX_Y_AXES_HEIGHT = 17000;
 const TICK_GAP = 100;
 const ANIMATION_DURATION = 0;
 export const createChart = (ctx: HTMLCanvasElement) => new Chart(ctx, chartConfigs);
