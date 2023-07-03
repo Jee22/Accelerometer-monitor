@@ -1,5 +1,5 @@
 export enum ble_configs {
-    DEVICE_NAME = 'Dolittle',
+    DEVICE_NAME = '3Axis',
     AXIS_SERVICE_UUID = 'ef680800-9b35-4933-9b10-52ffa9740042',
     X_CHAR = 'ef680806-9b35-4933-9b10-52ffa9740042',
     Y_CHAR = 'ef680807-9b35-4933-9b10-52ffa9740042',
