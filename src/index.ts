@@ -7,7 +7,7 @@ const chartContext = document.getElementById('myChart') as HTMLCanvasElement;
 
 const chart = createChart(chartContext);
 
-const motionBanner = document.getElementById('motion-status') as HTMLElement;
+// const motionBanner = document.getElementById('motion-status') as HTMLElement;
 
 // function detectedMotionCallback(motion: MOTION) {
 //     switch (motion) {
